@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   const [text, setText] = useState("");
-  const [suggestion, setSuggestion] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
   const customDictionary = {
     teh: "the",
@@ -14,17 +14,18 @@ function App() {
 
   const checkSpelling = (inputText) => {
     const words = inputText.split(" ");
-    let suggestedWord = "";
+    const newSuggestions = [];
 
     for (let word of words) {
       const lowerCaseWord = word.toLowerCase();
       if (customDictionary[lowerCaseWord]) {
-        suggestedWord = `Did you mean: ${customDictionary[lowerCaseWord]}?`;
-        break;
+        newSuggestions.push(
+          `Did you mean: ${customDictionary[lowerCaseWord]}?`
+        );
       }
     }
 
-    setSuggestion(suggestedWord);
+    setSuggestions(newSuggestions);
   };
 
   const handleInputChange = (e) => {
@@ -32,7 +33,7 @@ function App() {
     setText(inputText);
 
     if (inputText.trim() === "") {
-      setSuggestion("");
+      setSuggestions([]);
       return;
     }
 
@@ -49,7 +50,11 @@ function App() {
         rows={8}
         cols={50}
       ></textarea>
-      {suggestion && <p>{suggestion}</p>}
+      <div>
+        {suggestions.map((suggestion, index) => (
+          <p key={index}>{suggestion}</p>
+        ))}
+      </div>
     </div>
   );
 }
