@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.p-10 {
+  padding: 10px;
+}
+h1 {
+  margin-bottom: 10px;
+}
+textarea {
+  padding: 5px;
+}
